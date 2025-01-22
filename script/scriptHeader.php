@@ -20,7 +20,7 @@ if ($utilisateur == 3){
 }
 
 if ($utilisateur == 0){
-    require_once "front/header.php";
+    require_once "../front/header.php";
 }
 
 ?>

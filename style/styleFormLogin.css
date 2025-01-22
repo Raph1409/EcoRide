@@ -1,0 +1,80 @@
+.formLogin {
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 5px;
+    background-color: #427AA1;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 2px solid #679436;
+    border-radius: 5px;
+}
+
+form a {
+    color: #EBF2FA !important;
+    text-decoration: none;
+}
+
+.label {
+    color: #EBF2FA;
+    font-weight: bold;
+    padding-right: 30px;
+}
+
+h2 {
+    color: #EBF2FA !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 50px;
+    background-color: #427AA1;
+    padding-top: 5px;
+}
+
+body {
+    background-color: #EBF2FA !important;
+}
+
+.inputBasic {
+    border: 3px solid #679436;
+    border-radius: 5px;
+    padding: 5px;
+    transition: all 0.8s ease;
+    width: 500px;
+}
+
+.inputBasic2 {
+    border: 3px solid #679436;
+    border-radius: 5px;
+    padding: 5px;
+    transition: all 0.8s ease;
+}
+
+.inputBasic:focus {
+    background-color: #679436;
+}
+
+.inputBasic2:focus {
+    background-color: #679436;
+}
+
+.bouton {
+    background-color: #427AA1;
+    color: #EBF2FA;
+    border: 2px solid #679436;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.8s ease;
+}
+
+.bouton:hover {
+    background-color: #EBF2FA;
+    color: #427AA1;
+    border: 2px solid #679436;
+    border-radius: 5px;
+    font-weight: bold;
+}
