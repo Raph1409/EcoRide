@@ -14,6 +14,8 @@
     <title>EcoRide</title>
 </head>
 
+<?php session_start(); ?>
+
 <header>
 
     <?php require_once "../script/scriptHeader.php"; ?>
@@ -21,6 +23,8 @@
 </header>
 
 <body>
+
+    <?php require_once "../front/bigTitle.php"; ?>
 
     <h2>Contact</h2>
 

@@ -14,3 +14,9 @@
     <?php require_once "script/scriptHeader.php"; ?>
 
 </header>
+
+<body>
+
+    <?php require_once "front/bigTitle.php"; ?>
+
+</body>
