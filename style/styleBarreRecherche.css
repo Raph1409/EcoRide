@@ -1,0 +1,44 @@
+/* Appliquer un fond bleu et de l'espacement interne */
+.container-fluid {
+    background-color: #427AA1;
+    /* Fond bleu */
+    padding: 15px;
+    /* Espacement interne */
+}
+
+/* Ajouter un peu de marge aux champs et au bouton */
+input[type="text"],
+input[type="date"] {
+    height: 45px;
+    /* Hauteur des champs */
+}
+
+button[type="submit"] {
+    height: 45px;
+    /* Hauteur du bouton */
+    background-color: #EBF2FA;
+    color: #427AA1;
+    border: 2px solid #679436;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.8s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #427AA1;
+    color: #EBF2FA;
+    border: 2px solid #679436;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.form-control:focus {
+    background-color: #679436
+}
+
+h4 {
+    text-align: center;
+    color: #EBF2FA;
+    text-decoration: underline;
+    padding-bottom: 5px;
+}
