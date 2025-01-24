@@ -21,4 +21,11 @@
     <?php require_once "front/bigTitle.php"; ?>
     <?php require_once "front/barreRecherche.php";?>
     <?php require_once "front/accueil.php";?>
+
 </body>
+
+<footer>
+
+    <?php require_once "front/footer.php";?>
+
+</footer>
