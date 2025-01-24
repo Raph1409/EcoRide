@@ -38,7 +38,7 @@ button[type="submit"]:hover {
 
 h4 {
     text-align: center;
-    color: #EBF2FA;
+    color: #EBF2FA !important;
     text-decoration: underline;
     padding-bottom: 5px;
 }
