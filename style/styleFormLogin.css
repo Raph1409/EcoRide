@@ -45,6 +45,7 @@ body {
     padding: 5px;
     transition: all 0.8s ease;
     width: 75%;
+    text-align: center;
 }
 
 .inputBasic2 {

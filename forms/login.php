@@ -34,7 +34,7 @@
         <input type="password" name="password" class="inputBasic2" required> <br><br>
         <!-- BUTTON -->
         <input class="bouton" type="submit" value="Se connecter"><br><br>
-        <a href="/">Créer un compte</a>
+        <a href="../forms/register.php">Créer un compte</a>
     </form>
 </body>
 
