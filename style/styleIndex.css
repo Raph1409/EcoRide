@@ -24,3 +24,14 @@ h3 {
 .card {
     background-color: #427AA1 !important;
 }
+
+h2 {
+    color: #EBF2FA !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 50px;
+    background-color: #427AA1;
+    padding-top: 5px;
+}

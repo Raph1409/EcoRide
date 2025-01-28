@@ -28,7 +28,7 @@
                         <a class="nav-link" href="/">Employé(e)</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Deconnexion</a>
+                        <a class="nav-link" href="../script/deconnexion.php">Deconnexion</a>
                     </li>
                 </ul>
             </div>

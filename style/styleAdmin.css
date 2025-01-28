@@ -1,0 +1,87 @@
+.body {
+    display: block;
+    color: #EBF2FA;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 5px;
+    background-color: #427AA1;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 2px solid #679436;
+    border-radius: 5px;
+}
+
+.button {
+    background-color: #427AA1;
+    color: #EBF2FA;
+    border: 2px solid #679436;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.8s ease;
+}
+
+.button:hover {
+    background-color: #EBF2FA;
+    color: #427AA1;
+}
+
+
+.card {
+    justify-content: center;
+    text-align: center;
+    background-color: #427AA1;
+    border: 2px solid #679436;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: auto;
+}
+
+.card h2 {
+    color: #EBF2FA;
+}
+
+.formLogin2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 5px;
+    background-color: #427AA1;
+    justify-content: center;
+    text-align: center;
+    width: 75%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 2px solid #679436;
+    border-radius: 5px;
+}
+
+.label {
+    color: #EBF2FA;
+    font-weight: bold;
+    padding-right: 30px;
+}
+
+.inputBasic2 {
+    border: 3px solid #427AA1;
+    border-radius: 5px;
+    padding: 5px;
+    transition: all 0.8s ease;
+    width: 65%;
+}
+
+.container {
+    display: flex;
+    column-gap: 20px;
+}
+
+body {
+    background-color: #EBF2FA;
+}
+
+h2 {
+    color: #EBF2FA;
+}

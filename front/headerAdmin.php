@@ -25,10 +25,10 @@
                         <a class="nav-link" href="/">Covoiturages</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Administration</a>
+                        <a class="nav-link" href="../admin.php">Administration</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Deconnexion</a>
+                        <a class="nav-link" href="../script/deconnexion.php">Deconnexion</a>
                     </li>
                 </ul>
             </div>
