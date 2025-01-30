@@ -22,7 +22,7 @@
                         <a class="nav-link" href="/">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Covoiturages</a>
+                        <a class="nav-link" href="../covoiturage.php">Covoiturages</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/">Mon Espace</a>
