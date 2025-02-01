@@ -35,3 +35,16 @@ h2 {
     background-color: #427AA1;
     padding-top: 5px;
 }
+
+.h2statut {
+    color: #427AA1 !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: 50px;
+    background-color: #EBF2FA;
+    padding-top: 5px;
+    border: 1px #427AA1 solid;
+    border-radius: 5px;
+}

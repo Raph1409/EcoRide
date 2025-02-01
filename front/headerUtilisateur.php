@@ -25,7 +25,7 @@
                         <a class="nav-link" href="../covoiturage.php">Covoiturages</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Mon Espace</a>
+                        <a class="nav-link" href="../utilisateur.php">Mon Espace</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../script/deconnexion.php">Deconnexion</a>
