@@ -2,7 +2,13 @@
 
 require_once 'connexionBDD.php';
 
-$user_id = $_SESSION['user']['pseudo'];
+$proprietaireId = "SELECT utilisateur_id FROM utilisateurs WHERE pseudo = :pseudo";
+$stmt3 = $pdo->prepare($proprietaireId);
+$stmt3->bindParam(":pseudo", $_SESSION["user"]["pseudo"]);
+$stmt3->execute();
+
+$proprietaire = $stmt3->fetch(PDO::FETCH_ASSOC);
+$proprietaireIdHidden = $proprietaire['utilisateur_id'];
 
 $query = "
     SELECT 
@@ -18,15 +24,13 @@ $query = "
         marques m ON v.marque = m.marque_id
     JOIN 
         energies e ON v.energie = e.energie_id
-    JOIN 
-        utilisateurs u ON u.voiture = v.voiture_id  -- Jointure avec la table utilisateurs via la colonne 'voiture'
     WHERE 
-        u.pseudo = :user_id
+        v.proprietaire_id = :user_id
 ";
 
 // Préparer et exécuter la requête SQL
 $stmt = $pdo->prepare($query);
-$stmt->execute([':user_id' => $user_id]);
+$stmt->execute([':user_id' => $proprietaireIdHidden]);
 
 // Récupérer les données
 $mesVehicules = $stmt->fetchAll(PDO::FETCH_ASSOC); 
@@ -59,10 +63,6 @@ if (!empty($mesVehicules)) {
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-center">
-                <!-- Bouton de modification des informations du véhicule -->
-                <a href="modifier_vehicule.php" class="btn btn-warning">Modifier mon véhicule</a>
-            </div>
         </div>
     </div>
 </div>
@@ -75,5 +75,5 @@ if (!empty($mesVehicules)) {
 
 <!-- Bouton "Ajouter un véhicule" toujours visible sous la carte utilisateur -->
 <div class="text-center mt-4">
-    <a href="ajouter_vehicule.php" class="btn btn-success">Ajouter un véhicule</a>
+    <a href="../forms/vehiculeForm.php" class="btn btn-success">Ajouter un véhicule</a>
 </div>
