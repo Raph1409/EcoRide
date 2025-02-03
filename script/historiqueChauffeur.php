@@ -55,7 +55,7 @@ foreach ($covoiturages as $covoiturage) {
     }
 }
 ?>
-<h2>Historique de vos covoiturages</h2><br>
+<h2>Mes covoiturages (Chauffeur)</h2><br>
 <h2 class="h2statut mx-auto">En Cours</h2><br>
 <div class="container">
     <!-- En cours -->
@@ -176,4 +176,8 @@ foreach ($covoiturages as $covoiturage) {
         <?php endforeach; ?>
     </div>
 </div>
+
+<div class="text-center mt-4">
+    <a href="../forms/covoiturageForm.php" class="btn btn-success">Créer un Covoiturage</a>
+</div><br>
 </body>

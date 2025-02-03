@@ -17,7 +17,7 @@
 </head>
 
 <header>
-    <?php require_once '../front/header.php'; ?>
+    <?php require_once '../script/scriptHeader.php'; ?>
 </header>
 
 <body>
@@ -44,7 +44,7 @@ $stmt = $pdo->prepare($query);
 $stmt->bindParam(":immatriculation", $immatForm);
 $stmt->execute();
 
-//Est-ce que l'adresse mail existe
+//Est-ce que l'immatriculation existe
 if($stmt->rowCount() > 0){
     echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" . "Cette immatriculation est déjà utilisée" ."</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../utilisateur.php';> Retour </a>" . "</div>";
     die();

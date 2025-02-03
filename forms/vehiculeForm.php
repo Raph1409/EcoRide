@@ -54,7 +54,7 @@ $proprietaireIdHidden = $proprietaire['utilisateur_id'];
         <input type="hidden" name="proprietaire" value="<?php echo $proprietaireIdHidden ?>">
 
         <label class="label" for="marque">Marque : </label><br>
-        <select class="inputBasic2" name="marque">
+        <select class="inputBasic" name="marque">
             <option>--Choisissez une marque--</option>
 
             <?php 
@@ -75,7 +75,7 @@ $proprietaireIdHidden = $proprietaire['utilisateur_id'];
         <input class="inputBasic" type="date" name="premiereimmat" required><br><br>
 
         <label class="label" for="energie">Energie : </label><br>
-        <select class="inputBasic2" name="energie">
+        <select class="inputBasic" name="energie">
             <option>--Choisissez une énergie--</option>
 
             <?php 

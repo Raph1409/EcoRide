@@ -32,7 +32,8 @@
     <?php require_once "script/mesinfos.php"; ?>
     <?php require_once "script/mesvehicules.php"; ?><br>
 
-    <?php require_once "script/historique.php"; ?>
+    <?php require_once "script/historiqueChauffeur.php"; ?>
+    <?php require_once "script/historiquePassager.php"; ?>
 
 </body>
 
