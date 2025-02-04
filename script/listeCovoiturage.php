@@ -24,6 +24,7 @@ $query = $pdo->query("
         u.photo
     FROM covoiturage c
     JOIN utilisateurs u ON c.utilisateur = u.utilisateur_id
+    WHERE c.statut = 1
     ORDER BY c.date_depart ASC, c.heure_depart ASC
 ");
 

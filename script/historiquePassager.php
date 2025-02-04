@@ -49,7 +49,7 @@ foreach ($covoiturages as $covoiturage) {
         case 'En attente':
             $en_attente[] = $covoiturage;
             break;
-        case 'Terminé':
+        case 'Terminer':
             $termine[] = $covoiturage;
             break;
     }
@@ -100,7 +100,7 @@ foreach ($covoiturages as $covoiturage) {
 <h2 class="h2statut mx-auto">En Attente</h2><br>
 <div class="container">
     <!-- En attente -->
-    <div class="row mx-auto" style="width: 75%;">
+    <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($en_attente as $covoiturage): ?>
         <div class="col-md-4 mb-4">
             <div class="card shadow">
@@ -128,8 +128,8 @@ foreach ($covoiturages as $covoiturage) {
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="../front/detailCovoiturage.php?id=<?= urlencode($covoiturage['covoiturage_id']) ?>"
-                        class="btn btn-primary">Détails</a>
+                    <a href="../forms/noteForm.php?id=<?= urlencode($covoiturage['covoiturage_id']) ?>"
+                        class="btn btn-primary">Donner une note</a>
                 </div>
             </div>
         </div>
@@ -140,7 +140,7 @@ foreach ($covoiturages as $covoiturage) {
 <h2 class="h2statut mx-auto">Terminé</h2><br>
 <div class="container">
     <!-- Terminé -->
-    <div class="row mx-auto" style="width: 75%;">
+    <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($termine as $covoiturage): ?>
         <div class="col-md-4 mb-4">
             <div class="card shadow">
@@ -166,10 +166,6 @@ foreach ($covoiturages as $covoiturage) {
                         <p><strong>Écologique :</strong> <?= htmlspecialchars($covoiturage['ecologique']) ?></p>
                         <p class="fw-bold"><?= number_format($covoiturage['prix_personne'], 2) ?> Crédits</p>
                     </div>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="../front/detailCovoiturage.php?id=<?= urlencode($covoiturage['covoiturage_id']) ?>"
-                        class="btn btn-primary">Détails</a>
                 </div>
             </div>
         </div>

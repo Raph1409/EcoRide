@@ -17,14 +17,13 @@ $query = "
         c.nb_place,
         c.ecologique,
         c.prix_personne,
-        s.libelle AS statut_nom,  -- Alias pour le nom du statut
-        u.pseudo,                -- Ajout du pseudo de l'utilisateur
-        u.photo                  -- Ajout de la photo de l'utilisateur
-    FROM inscription i
-    JOIN covoiturage c ON i.covoiturage_id = c.covoiturage_id
+        s.libelle AS statut_nom,  
+        u.pseudo,                
+        u.photo                  
+    FROM covoiturage c
     JOIN statuts s ON c.statut = s.statut_id
-    JOIN utilisateurs u ON i.utilisateur_pseudo = u.pseudo  -- Jointure avec la table utilisateurs
-    WHERE i.utilisateur_pseudo = :user_id
+    JOIN utilisateurs u ON c.utilisateur = u.utilisateur_id  
+    WHERE c.utilisateur = (SELECT utilisateur_id FROM utilisateurs WHERE pseudo = :user_id)
     ORDER BY c.date_depart DESC
 ";
 
@@ -49,7 +48,7 @@ foreach ($covoiturages as $covoiturage) {
         case 'En attente':
             $en_attente[] = $covoiturage;
             break;
-        case 'Terminé':
+        case 'Terminer':
             $termine[] = $covoiturage;
             break;
     }
@@ -86,9 +85,15 @@ foreach ($covoiturages as $covoiturage) {
                         <p class="fw-bold"><?= number_format($covoiturage['prix_personne'], 2) ?> Crédits</p>
                     </div>
                 </div>
-                <div class="card-footer text-center">
-                    <a href="../script/se_desinscrire.php?id=<?= urlencode($covoiturage['covoiturage_id']) ?>"
-                        class="btn btn-danger">Se désinscrire</a>
+                <div class="card-footer text-center d-flex gap-2 justify-content-center align-items-center">
+                    <form method="post" action="../script/deleteCovoiturage.php">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($covoiturage['covoiturage_id']) ?>">
+                        <button type="submit" class="btn btn-danger">Annulé</button>
+                    </form>
+                    <form method="post" action="../script/statutsSwitch.php">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($covoiturage['covoiturage_id']) ?>">
+                        <button type="submit" name="statut" value="3" class="btn btn-warning">Arrivé</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -100,7 +105,7 @@ foreach ($covoiturages as $covoiturage) {
 <h2 class="h2statut mx-auto">En Attente</h2><br>
 <div class="container">
     <!-- En attente -->
-    <div class="row mx-auto" style="width: 75%;">
+    <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($en_attente as $covoiturage): ?>
         <div class="col-md-4 mb-4">
             <div class="card shadow">
@@ -127,10 +132,6 @@ foreach ($covoiturages as $covoiturage) {
                         <p class="fw-bold"><?= number_format($covoiturage['prix_personne'], 2) ?> Crédits</p>
                     </div>
                 </div>
-                <div class="card-footer text-center">
-                    <a href="../front/detailCovoiturage.php?id=<?= urlencode($covoiturage['covoiturage_id']) ?>"
-                        class="btn btn-primary">Détails</a>
-                </div>
             </div>
         </div>
         <?php endforeach; ?>
@@ -140,7 +141,7 @@ foreach ($covoiturages as $covoiturage) {
 <h2 class="h2statut mx-auto">Terminé</h2><br>
 <div class="container">
     <!-- Terminé -->
-    <div class="row mx-auto" style="width: 75%;">
+    <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($termine as $covoiturage): ?>
         <div class="col-md-4 mb-4">
             <div class="card shadow">
@@ -166,10 +167,6 @@ foreach ($covoiturages as $covoiturage) {
                         <p><strong>Écologique :</strong> <?= htmlspecialchars($covoiturage['ecologique']) ?></p>
                         <p class="fw-bold"><?= number_format($covoiturage['prix_personne'], 2) ?> Crédits</p>
                     </div>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="../front/detailCovoiturage.php?id=<?= urlencode($covoiturage['covoiturage_id']) ?>"
-                        class="btn btn-primary">Détails</a>
                 </div>
             </div>
         </div>
