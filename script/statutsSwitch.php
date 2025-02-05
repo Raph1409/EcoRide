@@ -19,30 +19,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 
         // Déterminer le nouveau statut
         $nouveauStatut = ($nbInscriptions > 0) ? 3 : 2;
-    } elseif ($statutActuel == 3) {
-        // Si le statut est 3, on passe simplement à 4
-        $nouveauStatut = 4;
+
+        // Mettre à jour le statut du covoiturage
+        $sqlUpdate = "UPDATE covoiturage SET statut = ? WHERE covoiturage_id = ?";
+        $stmtUpdate = $pdo->prepare($sqlUpdate);
+        $stmtUpdate->execute([$nouveauStatut, $id]);
+
+        // Rediriger vers utilisateur.php UNIQUEMENT si le statut était 1
+        header("Location: ../utilisateur.php");
+        exit();
     } 
     
-     elseif ($statutActuel == 4) {
-        // Si le statut est  4, on passe simplement à 2
+    elseif ($statutActuel == 3) {
+        // Vérifier que tous les passagers ont noté le chauffeur
+        $sqlCountIns = "SELECT COUNT(*) FROM inscription WHERE covoiturage_id = ?";
+        $stmtCountIns = $pdo->prepare($sqlCountIns);
+        $stmtCountIns->execute([$id]);
+        $nbPassagers = $stmtCountIns->fetchColumn();
+
+        $sqlCountNotes = "SELECT COUNT(DISTINCT passager_id) FROM notes WHERE covoiturage_id = ?";
+        $stmtCountNotes = $pdo->prepare($sqlCountNotes);
+        $stmtCountNotes->execute([$id]);
+        $nbNotes = $stmtCountNotes->fetchColumn();
+
+        if ($nbNotes == $nbPassagers && $nbPassagers > 0) {
+            $nouveauStatut = 4;
+        } else {
+            $nouveauStatut = $statutActuel;
+        }
+    } 
+    
+    elseif ($statutActuel == 4) {
+        // Changer le statut en 2 et rediriger vers employe.php
         $nouveauStatut = 2;
-    }else {
-        echo "Le statut du covoiturage ne peut pas être mis à jour.";
-        exit();
-    }
 
-    // Mettre à jour le statut du covoiturage
-    $sqlUpdate = "UPDATE covoiturage SET statut = ? WHERE covoiturage_id = ?";
-    $stmtUpdate = $pdo->prepare($sqlUpdate);
+        // Mettre à jour le statut
+        $sqlUpdate = "UPDATE covoiturage SET statut = ? WHERE covoiturage_id = ?";
+        $stmtUpdate = $pdo->prepare($sqlUpdate);
+        $stmtUpdate->execute([$nouveauStatut, $id]);
 
-    if ($stmtUpdate->execute([$nouveauStatut, $id])) {
-        // Redirection après mise à jour
-        header("Location: ../utilisateur.php?success=statutUpdated");
+        // Rediriger vers employe.php après mise à jour
+        header("Location: ../employe.php");
         exit();
     } else {
-        echo "Erreur lors de la mise à jour du statut.";
+        $nouveauStatut = $statutActuel;
     }
-} else {
-    echo "Requête invalide.";
+
+    // Mettre à jour le statut si nécessaire (pour les autres cas)
+    if ($nouveauStatut != $statutActuel) {
+        $sqlUpdate = "UPDATE covoiturage SET statut = ? WHERE covoiturage_id = ?";
+        $stmtUpdate = $pdo->prepare($sqlUpdate);
+        $stmtUpdate->execute([$nouveauStatut, $id]);
+    }
 }
+?>

@@ -79,3 +79,12 @@ body {
     border-radius: 5px;
     font-weight: bold;
 }
+
+a .bouton {
+    background-color: #427AA1;
+    color: #EBF2FA;
+    border: 2px solid #679436;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.8s ease;
+}

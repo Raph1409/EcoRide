@@ -38,6 +38,7 @@ $covoiturages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $en_cours = [];
 $en_attente = [];
 $termine = [];
+$a_valider = [];
 
 // Parcourir les résultats et trier par statut
 foreach ($covoiturages as $covoiturage) {
@@ -50,6 +51,9 @@ foreach ($covoiturages as $covoiturage) {
             break;
         case 'Terminer':
             $termine[] = $covoiturage;
+            break;
+        case 'A Valider':
+            $a_valider[] = $covoiturage;
             break;
     }
 }
@@ -102,12 +106,48 @@ foreach ($covoiturages as $covoiturage) {
 </div>
 
 
-<h2 class="h2statut mx-auto">En Attente</h2><br>
+<h2 class="h2statut mx-auto">En attente de notation</h2><br>
 <div class="container">
     <!-- En attente -->
     <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($en_attente as $covoiturage): ?>
         <div class="col-md-4 mb-4">
+            <div class="card shadow">
+                <div class="card-body d-flex">
+                    <!-- Colonne gauche : Profil -->
+                    <div class="text-center me-3">
+                        <img src="data:image/jpeg;base64,<?= base64_encode($covoiturage['photo']) ?>"
+                            alt="Photo de profil" class="rounded-circle" width="80" height="80">
+                        <h6 class="pseudoCard mt-2"><?= htmlspecialchars($covoiturage['pseudo']) ?></h6>
+                    </div>
+
+                    <!-- Colonne droite : Infos covoiturage -->
+                    <div>
+                        <p class="lieuCard"><?= htmlspecialchars($covoiturage['lieu_depart']) ?> ➝
+                            <?= htmlspecialchars($covoiturage['lieu_arrive']) ?></p>
+                        <p><strong>Départ :</strong>
+                            <?= date('d/m/Y H:i', strtotime($covoiturage['date_depart'] . ' ' . $covoiturage['heure_depart'])) ?>
+                        </p>
+                        <p><strong>Arrivée :</strong>
+                            <?= date('d/m/Y H:i', strtotime($covoiturage['date_arrive'] . ' ' . $covoiturage['heure_arrive'])) ?>
+                        </p>
+                        <p><strong>Places :</strong> <?= htmlspecialchars($covoiturage['nb_place']) ?></p>
+                        <p><strong>Écologique :</strong> <?= htmlspecialchars($covoiturage['ecologique']) ?></p>
+                        <p class="fw-bold"><?= number_format($covoiturage['prix_personne'], 2) ?> Crédits</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<h2 class="h2statut mx-auto">En attente de validation</h2><br>
+<div class="container">
+    <!-- En cours -->
+    <div class="row mx-auto" style="width: 100%;">
+        <?php foreach ($a_valider as $covoiturage): ?>
+        <div class="col-md-4 md-4">
             <div class="card shadow">
                 <div class="card-body d-flex">
                     <!-- Colonne gauche : Profil -->
