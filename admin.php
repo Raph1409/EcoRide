@@ -15,6 +15,7 @@
 
     <?php require_once "script/scriptHeader.php"; ?>
 
+
 </header>
 
 <body>
@@ -47,6 +48,30 @@
                 <h2>Suspendre un compte</h2>
                 <?php require_once 'forms/selectCompteForm.php'; ?>
             </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-sm-6">
+            <div class="card">
+                <h2>Nombre de covoiturages par jour</h2>
+                <img src="../script/graphique1.php" alt="Graphique des covoiturages">
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="card">
+                <h2>Gains de la plateforme par jour</h2>
+                <img src="../script/graphique2.php" alt="Graphique des covoiturages">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card mx-auto">
+
+            <?php require_once 'script/compteur.php'; ?>
+
         </div>
     </div>
 

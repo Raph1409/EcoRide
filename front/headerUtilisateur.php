@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../script/deconnexion.php">Deconnexion</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../info.php">info</a>
+                    </li>
                 </ul>
             </div>
         </div>

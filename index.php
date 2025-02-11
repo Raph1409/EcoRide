@@ -17,6 +17,13 @@
 </header>
 
 <body>
+    <?php
+if (function_exists('imagecreatetruecolor')) {
+    echo "GD est activé 🎉";
+} else {
+    echo "GD n'est pas activé ❌";
+}
+?>
 
     <?php require_once "front/bigTitle.php"; ?>
     <?php require_once "front/barreRecherche.php";?>
