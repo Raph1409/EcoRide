@@ -86,6 +86,8 @@ if (count($voitures) === 0) {
         <input class="inputBasic" type="time" name="heure_arrivee" required><br><br>
 
         <label class="label" for="prix">Prix par personne (crédits) : </label><br>
+        <p style="font-size: 14px; font-style: italic; color: #EBF2FA;">La plateforme perçoit 2 crédits par passager
+            afin de garantir son bon fonctionnement.</p>
         <input class="inputBasic" type="text" name="prix" required><br><br>
 
         <label class="label" for="nombre_place">Nombre de places : </label><br>
