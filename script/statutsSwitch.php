@@ -4,11 +4,11 @@ require '../script/connexionBDD.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $id = $_POST['id'];
 
-    // Récupérer le statut actuel du covoiturage
-    $sqlGetStatus = "SELECT statut, prix_personne, utilisateur FROM covoiturage WHERE covoiturage_id = ?";
-    $stmtGetStatus = $pdo->prepare($sqlGetStatus);
-    $stmtGetStatus->execute([$id]);
-    $covoiturage = $stmtGetStatus->fetch(PDO::FETCH_ASSOC);
+        // Récupérer le statut actuel, le prix et le conducteur du covoiturage
+        $sqlGetStatus = "SELECT statut, prix_personne, utilisateur FROM covoiturage WHERE covoiturage_id = ?";
+        $stmtGetStatus = $pdo->prepare($sqlGetStatus);
+        $stmtGetStatus->execute([$id]);
+        $covoiturage = $stmtGetStatus->fetch(PDO::FETCH_ASSOC);
     
     if ($covoiturage) {
         $statutActuel = $covoiturage['statut'];
@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         exit("Covoiturage introuvable");
     }
 
-    // Récupérer le pseudo du conducteur à partir de son ID
-$sqlGetPseudo = "SELECT pseudo FROM utilisateurs WHERE utilisateur_id = ?";
-$stmtGetPseudo = $pdo->prepare($sqlGetPseudo);
-$stmtGetPseudo->execute([$conducteurPseudo]);
-$conducteurPseudo = $stmtGetPseudo->fetchColumn();
+        // Récupérer le pseudo du conducteur à partir de son ID
+        $sqlGetPseudo = "SELECT pseudo FROM utilisateurs WHERE utilisateur_id = ?";
+        $stmtGetPseudo = $pdo->prepare($sqlGetPseudo);
+        $stmtGetPseudo->execute([$conducteurPseudo]);
+        $conducteurPseudo = $stmtGetPseudo->fetchColumn();
 
 
     if ($statutActuel == 1) {
@@ -76,10 +76,18 @@ $conducteurPseudo = $stmtGetPseudo->fetchColumn();
 
         // Créditer le conducteur
         if ($nbPassagers > 0) {
-            $totalRevenu = $prixPersonne * $nbPassagers;
+            $totalRevenu = ($prixPersonne * $nbPassagers) - (2 * $nbPassagers);
             $sqlCreditConducteur = "UPDATE utilisateurs SET credit = credit + ? WHERE pseudo = ?";
             $stmtCreditConducteur = $pdo->prepare($sqlCreditConducteur);
             $stmtCreditConducteur->execute([$totalRevenu, $conducteurPseudo]);
+        }
+
+        // Créditer l'admin
+        if ($nbPassagers > 0) {
+            $totalAdmin = 2 * $nbPassagers;
+            $sqlCreditAdmin = "UPDATE utilisateurs SET credit = credit + ? WHERE role = 1";
+            $stmtCreditAdmin = $pdo->prepare($sqlCreditAdmin);
+            $stmtCreditAdmin->execute([$totalAdmin]);
         }
 
         // Changer le statut en 2 et rediriger vers employe.php

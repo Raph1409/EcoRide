@@ -27,6 +27,14 @@
         </p>
         <button class="button" onclick="window.location.href = '../script/deconnexion.php';"> Déconnexion </button>
     </div>
+
+    <div class="card mx-auto w-50">
+
+        <h2>Créditer un utilisateur</h2>
+        <?php require_once 'forms/creditForm.php'; ?>
+
+    </div>
+
     <div class="container">
         <div class="col-sm-6">
             <div class="card">
