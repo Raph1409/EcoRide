@@ -2,6 +2,16 @@ body {
     background-color: #EBF2FA;
 }
 
+footer {
+    margin-top: auto;
+    /* Permet de pousser le footer en bas si la page est courte */
+    width: 100%;
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
 p {
     text-align: center;
     margin: auto 40px;

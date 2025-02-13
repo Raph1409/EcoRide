@@ -73,7 +73,7 @@
 
         }else if($_SESSION["user"]["role"] === 4){
 
-            header("Location: /suspendu.php");    
+            header("Location: ../script/suspendu.php");    
 
         }else if($_SESSION["user"]["role"] === 3){
 

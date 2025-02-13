@@ -10,7 +10,7 @@
 <header>
     <nav class="navbar navbar-expand-lg" style="background-color: #427AA1;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.php">EcoRide</a>
+            <a class="navbar-brand" href="/index.php">EcoRide</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -19,19 +19,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Accueil</a>
+                        <a class="nav-link" href="../front/contact.php">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Covoiturages</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../admin.php">Administration</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../employe.php">Employé</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../script/deconnexion.php">Deconnexion</a>
+                        <a class="nav-link" href="../script/deconnexion.php">Déconnexion</a>
                     </li>
                 </ul>
             </div>

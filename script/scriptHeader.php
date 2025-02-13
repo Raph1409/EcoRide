@@ -24,6 +24,10 @@ if ($utilisateur == 3){
     require_once $rootPath . "front/headerUtilisateur.php";
 }
 
+if ($utilisateur == 4){
+    require_once $rootPath . "front/headerSuspendu.php";
+}
+
 if ($utilisateur == 0){
     require_once $rootPath . "front/header.php";
 }
