@@ -20,11 +20,18 @@ session_start(); ?>
 
 </head>
 
+<header>
+    <?php require_once '../script/scriptHeader.php'; ?>
+    <?php require_once "../front/bigTitle.php"; ?>
+</header>
+
 <?php require_once '../script/connexionBDD.php';
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION["user"]["pseudo"])) {
-    die("Erreur : utilisateur non connecté.");
+// Vérifiez si l'utilisateur est connecté et s'il a un rôle
+if (!isset($_SESSION["user"]) || ($_SESSION["user"]["role"] != 3 && $_SESSION["user"]["role"] != 1 && $_SESSION["user"]["role"] != 2)) {
+    // Si l'utilisateur n'est pas connecté ou n'a pas de rôle, affichage d'un message
+    echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez être connecté pour créer à un covoiturage." . "</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../forms/login.php';> Connexion/Inscription </a>" . "<br>" . "<a style='color:#63340B;  font-weight:bold;' href='../index.php';> Retour </a>" . "</div>";
+    exit;
 }
 
 // Récupération de l'ID de l'utilisateur connecté
@@ -54,13 +61,8 @@ if (count($voitures) === 0) {
 }
 ?>
 
-<header>
-    <?php require_once '../script/scriptHeader.php'; ?>
-</header>
 
 <body>
-
-    <?php require_once "../front/bigTitle.php"; ?>
 
     <h2>Formulaire d'inscription</h2>
 
@@ -121,3 +123,7 @@ if (count($voitures) === 0) {
 </body>
 
 </html>
+
+<footer>
+    <?php require_once "../front/footer.php";?>
+</footer>
