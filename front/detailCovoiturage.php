@@ -109,8 +109,8 @@ echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:
 
     <h2 class="mb-4 text-center">Détails du Covoiturage</h2>
 
-    <div class="row mx-auto" style="width: 35%;">
-        <div class="col-md-12 mb-4">
+    <div class="row mx-auto justify-content-center">
+        <div class="col-12 col-md-8 col-lg-4 mb-4">
             <div class="card shadow">
                 <div class="card-body d-flex flex-column align-items-center text-center">
                     <!-- Colonne gauche : Profil -->
@@ -167,3 +167,7 @@ echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:
     </div>
 
 </body>
+
+<footer>
+    <?php require_once "../front/footer.php";?>
+</footer>

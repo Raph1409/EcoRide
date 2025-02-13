@@ -21,12 +21,12 @@ $mesInfos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (!empty($mesInfos)) {
     $user = $mesInfos[0]; // On suppose qu'il n'y a qu'un seul utilisateur
 ?>
-<div class="body mt-5 mx-auto">
+<div class="mx-auto">
     <!-- Informations de l'utilisateur -->
-    <div class="row mb-4">
-        <div class="col-12">
+    <div class="row mb-4 justify-content-center">
+        <div class="card col-8 col-md-8 col-lg-4 mb-4">
             <div class="card-header text-center">
-                <h4>Mes Informations</h4>
+                <h4 style="color: #EBF2FA;">Mes Informations</h4>
             </div>
             <div class="card-body">
                 <!-- Affichage de la photo de profil -->
@@ -46,9 +46,6 @@ if (!empty($mesInfos)) {
                     <p><strong>Date de naissance:</strong> <?= htmlspecialchars($user['date_naissance']) ?></p>
                     <p><strong>Crédits:</strong> <?= htmlspecialchars($user['credit']) ?> Crédits</p>
                 </div>
-            </div>
-            <div class="card-footer text-center">
-                <a href="modifier_profil.php" class="btn btn-warning">Modifier mes informations</a>
             </div>
         </div>
     </div>
