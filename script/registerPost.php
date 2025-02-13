@@ -44,6 +44,7 @@
     $surnameForm = $_POST['surname'];
     $birthdayForm = $_POST['naissance'];
     $phoneForm = $_POST['phone'];
+    $sexeForm = $_POST['choix'];
 
     // crédit bonus pour inscription et parametrage du rôle utilisateur par défault
 
@@ -67,8 +68,17 @@
     //Hashage du mot de passe
     $hashedPassword = password_hash($passwordForm, PASSWORD_DEFAULT);
 
+    // Déterminer l'image à insérer en fonction du choix
+    if ($sexeForm == "H") {
+        // Lire l'image "Homme" en tant que contenu binaire
+        $photoContent = file_get_contents('../images/homme.png');
+    } elseif ($sexeForm == "F") {
+        // Lire l'image "Femme" en tant que contenu binaire
+        $photoContent = file_get_contents('../images/femme.png');
+    }
+
     //Insérer les données dans la base
-    $insertQuery = "INSERT INTO utilisateurs (pseudo, email, password, nom, prenom, date_naissance, telephone, credit, role) VALUES (:pseudo, :email, :password, :name, :surname, :birthday, :phone, :credit, :role)";
+    $insertQuery = "INSERT INTO utilisateurs (pseudo, email, password, nom, prenom, date_naissance, telephone, credit, role, photo) VALUES (:pseudo, :email, :password, :name, :surname, :birthday, :phone, :credit, :role, :photo)";
     $stmt = $pdo->prepare($insertQuery);
     $stmt->bindParam(":pseudo", $pseudoForm);
     $stmt->bindParam(":email", $emailForm);
@@ -79,13 +89,10 @@
     $stmt->bindParam(":phone", $phoneForm);
     $stmt->bindParam(":credit", $creditFree);
     $stmt->bindParam(":role", $roleDefault);
+    $stmt->bindParam(":photo", $photoContent, PDO::PARAM_LOB);
     $stmt->execute();
 
     echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" . "Création de compte réussie !" ."</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../index.php';> Retour </a>" . "</div>" ; 
 
 
 ?>
-
-    <footer>
-        <?php require_once '../front/footer.php'; ?>
-    </footer>

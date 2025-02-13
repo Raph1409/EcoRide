@@ -45,6 +45,13 @@
         <label class="label" for="naissance">Date de Naissance : </label><br>
         <input class="inputBasic" type="date" name="naissance" required><br><br>
 
+        <label class="label" for="choix">Choisissez un sexe :</label><br>
+        <select class="inputBasic" id="choix" name="choix">
+            <option value="">Sélectionner</option>
+            <option value="H">Homme</option>
+            <option value="F">Femme</option>
+        </select><br><br>
+
         <label class="label" for="phone">Numéro de téléphone : </label><br>
         <input class="inputBasic" type="text" name="phone" required><br><br>
 
