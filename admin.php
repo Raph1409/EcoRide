@@ -1,7 +1,7 @@
 <?php session_start(); 
 
-    // Durée maximale d'inactivité (15 minutes)
-    $inactive_duration = 20; // 900 secondes = 15 minutes
+    // Durée maximale d'inactivité (5 minutes)
+    $inactive_duration = 300;
 
     // Vérifier si l'utilisateur est inactif
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $inactive_duration) {

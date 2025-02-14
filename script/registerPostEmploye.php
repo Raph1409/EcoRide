@@ -44,10 +44,12 @@
     $surnameForm = $_POST['surname'];
     $birthdayForm = $_POST['naissance'];
     $phoneForm = $_POST['phone'];
+    $sexeForm = $_POST['choix'];
 
     // crédit bonus pour inscription et parametrage du rôle utilisateur par défault
 
     $roleDefault = 2;
+    $creditDefault = 0;
 
 
     //Vérification de l'adresse mail (unique)
@@ -66,8 +68,15 @@
     //Hashage du mot de passe
     $hashedPassword = password_hash($passwordForm, PASSWORD_DEFAULT);
 
+    // Déterminer l'image à insérer en fonction du choix
+    if ($sexeForm == "H") {
+            $photoContent = file_get_contents('../images/employe.png');
+    } elseif ($sexeForm == "F") {
+            $photoContent = file_get_contents('../images/employeF.png');
+    }
+
     //Insérer les données dans la base
-    $insertQuery = "INSERT INTO utilisateurs (pseudo, email, password, nom, prenom, date_naissance, telephone, role) VALUES (:pseudo, :email, :password, :name, :surname, :birthday, :phone, :role)";
+    $insertQuery = "INSERT INTO utilisateurs (pseudo, email, password, nom, prenom, date_naissance, telephone, role, photo, credit) VALUES (:pseudo, :email, :password, :name, :surname, :birthday, :phone, :role, :photo, :credit)";
     $stmt = $pdo->prepare($insertQuery);
     $stmt->bindParam(":pseudo", $pseudoForm);
     $stmt->bindParam(":email", $emailForm);
@@ -77,9 +86,10 @@
     $stmt->bindParam(":birthday", $birthdayForm);
     $stmt->bindParam(":phone", $phoneForm);
     $stmt->bindParam(":role", $roleDefault);
+    $stmt->bindParam(":photo", $photoContent, PDO::PARAM_LOB);
+    $stmt->bindParam(":credit", $creditDefault);
     $stmt->execute();
-
-    echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" . "Création de compte employé(e) réussie !" ."</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../admin.php';> Retour </a>" . "</div>" ; 
+    echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" . "Création de compte employé(e) réussie !" ."</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../index.php';> Retour </a>" . "</div>" ; 
 
 
 ?>

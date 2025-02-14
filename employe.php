@@ -51,6 +51,8 @@
         <button class="button" onclick="window.location.href = '../script/deconnexion.php';"> Déconnexion </button>
     </div>
 
+    <?php require_once "script/mesinfos.php"; ?>
+
     <?php require_once "script/validationAvis.php"; ?>
 
 </body>
