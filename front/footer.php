@@ -6,7 +6,7 @@
     <a class="navbar-brand" href="/index.php">EcoRide</a>
     <div class="row">
         <div class="col-12 col-lg-6">
-            <p>contact@zooarcadia.com</p>
+            <p>contact@ecoride.com</p>
         </div>
         <div class="col-12 col-lg-6">
             <a href="/">Mentions légales</a>
