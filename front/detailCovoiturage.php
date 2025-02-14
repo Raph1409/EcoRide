@@ -35,31 +35,32 @@ if (isset($_GET['id'])) {
 
 <?php
 $query = $pdo->prepare("
-    SELECT  
-        c.date_depart, 
-        c.date_arrive, 
-        c.heure_depart, 
-        c.heure_arrive, 
-        c.lieu_depart, 
-        c.lieu_arrive, 
-        c.nb_place, 
-        c.ecologique, 
-        c.prix_personne,
-        c.covoiturage_id, 
-        u.utilisateur_id, 
-        u.pseudo, 
-        u.photo,
-        v.modele, 
-        v.couleur, 
-        v.date_premiere_immat, 
-        m.libelle AS marque,
-        e.libelle AS energie
-    FROM covoiturage c
-    JOIN utilisateurs u ON c.utilisateur = u.utilisateur_id
-    JOIN voitures v ON c.voiture = v.voiture_id
-    JOIN marques m ON v.marque = m.marque_id
-    JOIN energies e ON v.energie = e.energie_id
-    WHERE c.covoiturage_id = :covoiturage_id
+SELECT  
+    c.date_depart, 
+    c.date_arrive, 
+    c.heure_depart, 
+    c.heure_arrive, 
+    c.lieu_depart, 
+    c.lieu_arrive, 
+    c.nb_place, 
+    c.ecologique, 
+    c.prix_personne,
+    c.covoiturage_id, 
+    u.utilisateur_id, 
+    u.pseudo, 
+    u.photo,
+    v.modele, 
+    v.couleur, 
+    v.date_premiere_immat, 
+    m.libelle AS marque,
+    e.libelle AS energie,
+    (SELECT ROUND(AVG(note), 1) FROM notes WHERE chauffeur_id = u.utilisateur_id) AS moyenne_note
+FROM covoiturage c
+JOIN utilisateurs u ON c.utilisateur = u.utilisateur_id
+JOIN voitures v ON c.voiture = v.voiture_id
+JOIN marques m ON v.marque = m.marque_id
+JOIN energies e ON v.energie = e.energie_id
+WHERE c.covoiturage_id = :covoiturage_id
 ");
 
 $query->bindParam(':covoiturage_id', $covoiturage_id, PDO::PARAM_INT);
@@ -77,7 +78,7 @@ if (!$covoiturage) {
 // Vérifiez si l'utilisateur est connecté et s'il a le bon rôle (id == 3)
 if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role']) || $_SESSION['user']['role'] != 3) {
     // Si l'utilisateur n'est pas connecté ou n'a pas le rôle utilisateur, redirigez-le ou affichez un message
-    echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez être connecté pour vous inscrire à un covoiturage." . "</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../index.php';> Retour </a>" . "</div>";;
+    echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez être connecté en tant qu'utilisateur pour vous inscrire à un covoiturage." . "</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../index.php';> Retour </a>" . "</div>";;
     exit;
 }
 
@@ -118,6 +119,26 @@ echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:
                         <img src="data:image/jpeg;base64,<?= base64_encode($covoiturage['photo']) ?>"
                             alt="Photo de profil" class="rounded-circle" width="80" height="80">
                         <h6 class="pseudoCard mt-2"><?= htmlspecialchars($covoiturage['pseudo']) ?></h6>
+                        <p class="text-warning">
+                            <?php
+                                $note = $covoiturage['moyenne_note'];
+                            if ($note !== null) {
+                                $noteInt = floor($note);
+                                $demiEtoile = fmod($note, 1) >= 0.5;
+                            for ($i = 0; $i < $noteInt; $i++) {
+                                echo "⭐";
+                            }
+                            if ($demiEtoile) {
+                                echo "⭐️½";
+                            }
+
+                            for ($i = $noteInt + $demiEtoile; $i < 5; $i++) {
+                                echo "☆";
+                            }
+                            } else {
+                                echo "Non noté";
+                            }
+                            ?></p>
                     </div>
 
                     <!-- Colonne droite : Infos covoiturage -->
