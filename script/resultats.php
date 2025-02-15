@@ -1,52 +1,49 @@
-<?php session_start(); ?>
+<?php session_start(); 
 
-<?php
+    require_once '../script/connexionBDD.php';
 
-require_once '../script/connexionBDD.php';
+    // Récupération des données du formulaire
+    $villeDepart = !empty($_POST['villedepart']) ? trim($_POST['villedepart']) : null;
+    $villeArrivee = !empty($_POST['villearrivee']) ? trim($_POST['villearrivee']) : null;
+    $dateDepart = !empty($_POST['datedepart']) ? trim($_POST['datedepart']) : null;
 
-// Récupération des données du formulaire
-$villeDepart = !empty($_POST['villedepart']) ? trim($_POST['villedepart']) : null;
-$villeArrivee = !empty($_POST['villearrivee']) ? trim($_POST['villearrivee']) : null;
-$dateDepart = !empty($_POST['datedepart']) ? trim($_POST['datedepart']) : null;
+    $query = "
+        SELECT 
+            c.date_depart, 
+            c.date_arrive, 
+            c.heure_depart, 
+            c.heure_arrive, 
+            c.lieu_depart, 
+            c.lieu_arrive, 
+            c.nb_place, 
+            c.ecologique, 
+            c.prix_personne,
+            c.covoiturage_id, 
+            u.utilisateur_id, 
+            u.pseudo, 
+            u.photo
+        FROM covoiturage c
+        JOIN utilisateurs u ON c.utilisateur = u.utilisateur_id
+        WHERE 1=1
+    ";
+    $params = [];
 
-// Construction dynamique de la requête
-$query = "
-    SELECT 
-        c.date_depart, 
-        c.date_arrive, 
-        c.heure_depart, 
-        c.heure_arrive, 
-        c.lieu_depart, 
-        c.lieu_arrive, 
-        c.nb_place, 
-        c.ecologique, 
-        c.prix_personne,
-        c.covoiturage_id, 
-        u.utilisateur_id, 
-        u.pseudo, 
-        u.photo
-    FROM covoiturage c
-    JOIN utilisateurs u ON c.utilisateur = u.utilisateur_id
-    WHERE 1=1
-";
-$params = [];
+    if ($villeDepart) {
+        $query .= " AND lieu_depart LIKE :depart";
+        $params[':depart'] = "%$villeDepart%";
+    }
+    if ($villeArrivee) {
+        $query .= " AND lieu_arrive LIKE :arrivee";
+        $params[':arrivee'] = "%$villeArrivee%";
+    }
+    if ($dateDepart) {
+        $query .= " AND date_depart = :date";
+        $params[':date'] = $dateDepart;
+    }
 
-if ($villeDepart) {
-    $query .= " AND lieu_depart LIKE :depart";
-    $params[':depart'] = "%$villeDepart%";
-}
-if ($villeArrivee) {
-    $query .= " AND lieu_arrive LIKE :arrivee";
-    $params[':arrivee'] = "%$villeArrivee%";
-}
-if ($dateDepart) {
-    $query .= " AND date_depart = :date";
-    $params[':date'] = $dateDepart;
-}
-
-$stmt = $pdo->prepare($query);
-$stmt->execute($params);
-$covoiturages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
+    $covoiturages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <head>

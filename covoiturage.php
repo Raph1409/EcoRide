@@ -5,7 +5,6 @@
 
     // Vérifier si l'utilisateur est inactif
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $inactive_duration) {
-    // Détruire la session et rediriger vers la page de déconnexion
         session_unset();
         session_destroy();
         header("Location: ../script/inactivite.php");

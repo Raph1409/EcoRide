@@ -3,11 +3,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/style/styleIndex.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
     <div class="container mt-5">
-        <!-- Première carte -->
         <div class="card mb-4">
             <div class="row g-0 align-items-center">
                 <div class="col-md-6">
@@ -31,7 +31,6 @@
             </div>
         </div>
         <br>
-        <!-- Deuxième carte -->
         <div class="card mb-4">
             <div class="row g-0 align-items-center flex-row-reverse">
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
@@ -56,5 +55,4 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

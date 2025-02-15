@@ -1,15 +1,15 @@
 <?php
 
-// Connexion à la base de données
-require_once 'script/connexionBDD.php';
+    // Connexion à la base de données
+    require_once 'script/connexionBDD.php';
 
-// Récupérer les utilisateurs avec le rôle 3
-$queryCompte = "SELECT utilisateur_id, pseudo, email 
-                FROM utilisateurs
-                WHERE role = 3";
-$stmt = $pdo->prepare($queryCompte);
-$stmt->execute();
-$comptes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Récupérer les utilisateurs avec le rôle 3
+    $queryCompte = "SELECT utilisateur_id, pseudo, email 
+                    FROM utilisateurs
+                    WHERE role = 3";
+    $stmt = $pdo->prepare($queryCompte);
+    $stmt->execute();
+    $comptes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 

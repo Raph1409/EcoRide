@@ -1,5 +1,3 @@
-/* Global */
-
 a {
     text-decoration: none;
     color: #EBF2FA !important;
@@ -9,13 +7,9 @@ a {
     float: right;
 }
 
-/* Title */
-
 .navbar-brand {
     font-size: 35px !important;
 }
-
-/* link colour */
 
 .nav-link:hover {
     color: #679436 !important;

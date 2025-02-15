@@ -10,8 +10,8 @@
 
 <header>
     <?php
-    require_once '../script/scriptHeader.php'; ?>
-    <?php require '../front/bigTitle.php';?>
+    require_once '../script/scriptHeader.php';
+    require '../front/bigTitle.php';?>
 </header>
 
 <body>
@@ -25,11 +25,3 @@
         </div>
     </div>
 </body>
-
-<footer>
-
-    <?php require_once "../front/footer.php";?>
-
-</footer>
-
-</html>

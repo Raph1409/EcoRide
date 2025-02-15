@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -27,11 +25,6 @@
     <?php 
     require_once '../front/bigTitle.php'; 
     require_once '../script/connexionBDD.php';
-    ?>
-
-
-    <?php
-
 
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -57,12 +50,9 @@
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":email", $emailForm);
     $stmt->execute();
-
-    //Est-ce que l'adresse mail existe
     if($stmt->rowCount() > 0){
         echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" . "Cette adresse mail est déjà utilisée" ."</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../index.php';> Retour </a>" . "</div>";
         die();
-        
     }
 
     //Hashage du mot de passe
@@ -70,10 +60,8 @@
 
     // Déterminer l'image à insérer en fonction du choix
     if ($sexeForm == "H") {
-        // Lire l'image "Homme" en tant que contenu binaire
         $photoContent = file_get_contents('../images/homme.png');
     } elseif ($sexeForm == "F") {
-        // Lire l'image "Femme" en tant que contenu binaire
         $photoContent = file_get_contents('../images/femme.png');
     }
 

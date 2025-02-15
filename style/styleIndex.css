@@ -4,7 +4,6 @@ body {
 
 footer {
     margin-top: auto;
-    /* Permet de pousser le footer en bas si la page est courte */
     width: 100%;
     background: #333;
     color: white;

@@ -12,7 +12,6 @@
     <link href="http://fonts.googleap.com/css?family=Crete+Round" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>EcoRide</title>
-
 </head>
 
 <header>
@@ -20,23 +19,18 @@
 </header>
 
 <body>
-
     <?php require_once "../front/bigTitle.php"; ?>
-
     <h2>Connexion</h2>
 
     <form class="formLogin mx-auto" action="../script/loginPost.php" method="POST">
-        <!-- EMAIL -->
+
         <label for="email" class="label">Adresse e-mail :</label>
         <input type="email" name="email" class="inputBasic2" required> <br><br>
-        <!-- PASSWORD -->
+
         <label for="password" class="label">Mot de passe :</label>
         <input type="password" name="password" class="inputBasic2" required> <br><br>
-        <!-- BUTTON -->
+
         <input class="bouton" type="submit" value="Se connecter"><br><br>
         <a href="../forms/register.php">Créer un compte</a>
     </form>
 </body>
-
-
-</html>

@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <head>
     <link href="../style/styleBigTitle.css" rel="stylesheet">
 </head>

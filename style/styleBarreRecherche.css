@@ -1,16 +1,11 @@
-/* Appliquer un fond bleu et de l'espacement interne */
 .container-fluid {
     background-color: #427AA1;
-    /* Fond bleu */
     padding: 15px;
-    /* Espacement interne */
 }
 
-/* Ajouter un peu de marge aux champs et au bouton */
 input[type="text"],
 input[type="date"] {
     height: 45px;
-    /* Hauteur des champs */
 }
 
 .form-control:focus {

@@ -1,25 +1,25 @@
 <?php 
 
-require_once 'connexionBDD.php';
+    require_once 'connexionBDD.php';
 
-$user_id = $_SESSION['user']['pseudo'];
+    $user_id = $_SESSION['user']['pseudo'];
 
-$query = "
-    SELECT nom, prenom, email, telephone, adresse, date_naissance, photo, pseudo, credit 
-    FROM utilisateurs 
-    WHERE pseudo = :user_id
-";
+    $query = "
+        SELECT nom, prenom, email, telephone, adresse, date_naissance, photo, pseudo, credit 
+        FROM utilisateurs 
+        WHERE pseudo = :user_id
+    ";
 
-// Préparer et exécuter la requête SQL
-$stmt = $pdo->prepare($query);
-$stmt->execute([':user_id' => $user_id]);
+    // Préparer et exécuter la requête SQL
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([':user_id' => $user_id]);
 
-// Récupérer les données
-$mesInfos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Récupérer les données
+    $mesInfos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Vérifier si des informations ont été récupérées
-if (!empty($mesInfos)) {
-    $user = $mesInfos[0]; // On suppose qu'il n'y a qu'un seul utilisateur
+    // Vérifier si des informations ont été récupérées
+    if (!empty($mesInfos)) {
+        $user = $mesInfos[0];
 ?>
 <div class="mx-auto">
     <!-- Informations de l'utilisateur -->
@@ -29,7 +29,6 @@ if (!empty($mesInfos)) {
                 <h4 style="color: #EBF2FA;">Mes Informations</h4>
             </div>
             <div class="card-body">
-                <!-- Affichage de la photo de profil -->
                 <div class="text-center">
                     <img src="data:image/jpeg;base64,<?= base64_encode($user['photo']) ?>" alt="Photo de profil"
                         class="rounded-circle" width="150" height="150">

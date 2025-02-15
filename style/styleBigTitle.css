@@ -1,11 +1,8 @@
 .tigre {
     position: relative;
     height: 50%;
-    /* La hauteur prend tout l'écran */
     width: 100%;
-    /* La largeur prend tout l'écran */
     overflow: hidden;
-    /* Évite le débordement au cas où */
 
     &::before {
         content: "";
@@ -16,13 +13,9 @@
         height: 100%;
         background-image: url(../images/bigtitle.jpg);
         background-size: cover;
-        /* Ajuste l'image pour couvrir le conteneur */
         background-position: center;
-        /* Centre l'image */
         background-repeat: no-repeat;
-        /* Empêche la répétition de l'image */
         filter: brightness(0.6);
-        /* Assombrit l'image */
     }
 
     * {
@@ -35,15 +28,11 @@
         flex-direction: column;
         color: #EBF2FA;
         height: 100%;
-        /* Prend toute la hauteur de .tigre */
         align-content: center;
-        /* Centre horizontalement */
         justify-content: center;
-        /* Centre verticalement */
         align-items: center;
         flex-wrap: wrap;
         padding-right: 30px;
         text-align: center;
-        /* Centre le texte */
     }
 }

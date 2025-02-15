@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         $nouveauStatut = $statutActuel;
     }
 
-    // Mettre à jour le statut si nécessaire
+    // Mettre à jour le statut
     if ($nouveauStatut != $statutActuel) {
         $sqlUpdate = "UPDATE covoiturage SET statut = ? WHERE covoiturage_id = ?";
         $stmtUpdate = $pdo->prepare($sqlUpdate);

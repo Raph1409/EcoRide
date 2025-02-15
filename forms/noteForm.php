@@ -1,40 +1,42 @@
-<?php
-session_start();
-require_once '../script/connexionBDD.php';
+<?php session_start();
+    
+    require_once '../script/connexionBDD.php';
 
-// Vérifier que l'utilisateur est connecté
-if (!isset($_SESSION["user"]["pseudo"])) {
+    // Vérifier que l'utilisateur est connecté
+    if (!isset($_SESSION["user"]["pseudo"])) {
     die("Erreur : utilisateur non connecté.");
-}
+    }
 
-// Récupérer l'ID du covoiturage depuis l'URL
-if (isset($_GET['id'])) {
-    $covoiturage_id = $_GET['id'];
-} else {
+    // Récupérer l'ID du covoiturage depuis l'URL
+    if (isset($_GET['id'])) {
+        $covoiturage_id = $_GET['id'];
+    } else {
     die("Covoiturage ID manquant !");
-}
+    }
 
-// Récupérer l'ID du chauffeur depuis la table covoiturage
-$queryChauffeur = "SELECT utilisateur FROM covoiturage WHERE covoiturage_id = :id";
-$stmt = $pdo->prepare($queryChauffeur);
-$stmt->bindParam(":id", $covoiturage_id, PDO::PARAM_INT);
-$stmt->execute();
-$chauffeur = $stmt->fetch(PDO::FETCH_ASSOC);
-if (!$chauffeur) {
+        // Récupérer l'ID du chauffeur depuis la table covoiturage
+        $queryChauffeur = "SELECT utilisateur FROM covoiturage WHERE covoiturage_id = :id";
+        $stmt = $pdo->prepare($queryChauffeur);
+        $stmt->bindParam(":id", $covoiturage_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $chauffeur = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$chauffeur) {
     die("Covoiturage non trouvé.");
-}
-$chauffeurIdHidden = $chauffeur['utilisateur'];
+    }
+    
+    $chauffeurIdHidden = $chauffeur['utilisateur'];
 
-// Récupérer l'ID du passager depuis la table utilisateurs (via le pseudo stocké en session)
-$queryPassager = "SELECT utilisateur_id FROM utilisateurs WHERE pseudo = :pseudo";
-$stmt = $pdo->prepare($queryPassager);
-$stmt->bindParam(":pseudo", $_SESSION["user"]["pseudo"]);
-$stmt->execute();
-$passager = $stmt->fetch(PDO::FETCH_ASSOC);
-if (!$passager) {
+        // Récupérer l'ID du passager depuis la table utilisateurs (via le pseudo stocké en session)
+        $queryPassager = "SELECT utilisateur_id FROM utilisateurs WHERE pseudo = :pseudo";
+        $stmt = $pdo->prepare($queryPassager);
+        $stmt->bindParam(":pseudo", $_SESSION["user"]["pseudo"]);
+        $stmt->execute();
+        $passager = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$passager) {
     die("Utilisateur non trouvé.");
-}
-$passagerIdHidden = $passager['utilisateur_id'];
+    }
+
+    $passagerIdHidden = $passager['utilisateur_id'];
 ?>
 
 
@@ -45,19 +47,17 @@ $passagerIdHidden = $passager['utilisateur_id'];
     <link href="/style/styleFormLogin.css" rel="stylesheet">
     <link href="/style/styleCovoiturage.css" rel="stylesheet">
     <link href="/style/styleIndex.css" rel="stylesheet">
-    <!-- Inclusion de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Inclusion de l'en-tête et du grand titre -->
     <?php require_once '../script/scriptHeader.php'; ?>
     <?php require_once '../front/bigTitle.php'; ?>
 
     <div class="container mt-5">
         <h2 class="mb-4">Notez votre covoiturage !</h2>
         <form class="formLogin mx-auto" id="noteForm">
-            <!-- Champs cachés pour transmettre les IDs -->
+
             <input type="hidden" name="covoiturage_id" value="<?php echo htmlspecialchars($covoiturage_id); ?>">
             <input type="hidden" name="chauffeur_id" value="<?php echo htmlspecialchars($chauffeurIdHidden); ?>">
             <input type="hidden" name="passager_id" value="<?php echo htmlspecialchars($passagerIdHidden); ?>">
@@ -83,15 +83,15 @@ $passagerIdHidden = $passager['utilisateur_id'];
 
     <?php require_once '../front/footer.php'; ?>
 
-    <!-- Script AJAX pour intercepter la soumission du formulaire -->
+
     <script>
     document.getElementById('noteForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Empêche l'envoi classique du formulaire
+        e.preventDefault();
 
         const form = e.target;
         const formData = new FormData(form);
 
-        // Envoi AJAX vers notePost.php
+        // Envoi vers notePost.php
         fetch('../script/notePost.php', {
                 method: 'POST',
                 body: formData
@@ -99,10 +99,8 @@ $passagerIdHidden = $passager['utilisateur_id'];
             .then(response => response.text())
             .then(data => {
                 if (data.trim() === 'success') {
-                    // Redirection vers la page de confirmation en cas de succès
                     window.location.href = '../script/confirmation2.php';
                 } else {
-                    // Afficher un message d'erreur
                     alert("Une erreur est survenue : " + data);
                 }
             })

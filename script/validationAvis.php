@@ -1,48 +1,47 @@
 <?php 
+    require_once 'connexionBDD.php';
 
-require_once 'connexionBDD.php';
+    $user_id = $_SESSION['user']['pseudo'];
 
-$user_id = $_SESSION['user']['pseudo'];
+    // Récupération des covoiturages avec leurs passagers et commentaires groupés
+    $query = "
+        SELECT 
+            c.covoiturage_id,
+            c.utilisateur AS createur_id,
+            u1.pseudo AS createur_pseudo,
+            u1.email AS createur_email,
+            u1.telephone AS createur_telephone,
+            s.libelle AS statut_nom,
+            GROUP_CONCAT(u2.pseudo SEPARATOR '|') AS passager_pseudo,
+            GROUP_CONCAT(u2.email SEPARATOR '|') AS passager_email,
+            GROUP_CONCAT(u2.telephone SEPARATOR '|') AS passager_telephone,
+            GROUP_CONCAT(n.commentaire SEPARATOR '|') AS commentaire,
+            COUNT(n.passager_id) AS total_votes,
+            (SELECT COUNT(*) FROM inscription i WHERE i.covoiturage_id = c.covoiturage_id) AS total_passagers
+        FROM covoiturage c
+        JOIN statuts s ON c.statut = s.statut_id
+        JOIN utilisateurs u1 ON c.utilisateur = u1.utilisateur_id  
+        LEFT JOIN notes n ON c.covoiturage_id = n.covoiturage_id
+        LEFT JOIN utilisateurs u2 ON n.passager_id = u2.utilisateur_id
+        WHERE s.statut_id IN (4, 2)
+        GROUP BY c.covoiturage_id
+        ORDER BY c.date_depart DESC
+    ";
 
-// Récupération des covoiturages avec leurs passagers et commentaires groupés
-$query = "
-    SELECT 
-        c.covoiturage_id,
-        c.utilisateur AS createur_id,
-        u1.pseudo AS createur_pseudo,
-        u1.email AS createur_email,
-        u1.telephone AS createur_telephone,
-        s.libelle AS statut_nom,
-        GROUP_CONCAT(u2.pseudo SEPARATOR '|') AS passager_pseudo,
-        GROUP_CONCAT(u2.email SEPARATOR '|') AS passager_email,
-        GROUP_CONCAT(u2.telephone SEPARATOR '|') AS passager_telephone,
-        GROUP_CONCAT(n.commentaire SEPARATOR '|') AS commentaire,
-        COUNT(n.passager_id) AS total_votes,
-        (SELECT COUNT(*) FROM inscription i WHERE i.covoiturage_id = c.covoiturage_id) AS total_passagers
-    FROM covoiturage c
-    JOIN statuts s ON c.statut = s.statut_id
-    JOIN utilisateurs u1 ON c.utilisateur = u1.utilisateur_id  
-    LEFT JOIN notes n ON c.covoiturage_id = n.covoiturage_id
-    LEFT JOIN utilisateurs u2 ON n.passager_id = u2.utilisateur_id
-    WHERE s.statut_id IN (4, 2)
-    GROUP BY c.covoiturage_id
-    ORDER BY c.date_depart DESC
-";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $covoiturages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt = $pdo->prepare($query);
-$stmt->execute();
-$covoiturages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $a_valider = [];
+    $termine = [];
 
-$a_valider = [];
-$termine = [];
-
-foreach ($covoiturages as $covoiturage) {
-    if ($covoiturage['statut_nom'] == 'A Valider') {
-        $a_valider[] = $covoiturage;
-    } else {
-        $termine[] = $covoiturage;
+    foreach ($covoiturages as $covoiturage) {
+        if ($covoiturage['statut_nom'] == 'A Valider') {
+            $a_valider[] = $covoiturage;
+        } else {
+            $termine[] = $covoiturage;
+        }
     }
-}
 ?>
 
 <h2>Mes covoiturages (Chauffeur)</h2><br>
@@ -99,7 +98,6 @@ foreach ($covoiturages as $covoiturage) {
                         <strong>Téléphone :</strong> <?= htmlspecialchars($covoiturage['createur_telephone']) ?>
                     </p>
                     <?php 
-                    // Définir les variables passagers, emails, téléphones, et commentaires pour chaque covoiturage
                     $passagers = explode('|', $covoiturage['passager_pseudo']);
                     $emails = explode('|', $covoiturage['passager_email']);
                     $telephones = explode('|', $covoiturage['passager_telephone']);

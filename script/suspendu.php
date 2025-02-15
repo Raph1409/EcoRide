@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <head>
     <meta charset="UTF-8">
     <link href="/style/styleFormLogin.css" rel="stylesheet">
@@ -8,10 +10,9 @@
 </head>
 
 <header>
-    <?php
-    session_start(); 
-    require_once '../script/scriptHeader.php'; ?>
-    <?php require '../front/bigTitle.php';?>
+    <?php 
+    require_once '../script/scriptHeader.php'; 
+    require '../front/bigTitle.php';?>
 </header>
 
 <body>

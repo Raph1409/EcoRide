@@ -1,18 +1,16 @@
-<?php
+<?php session_start();
+    require_once 'connexionBDD.php';
 
-require_once 'connexionBDD.php';
-
-// Assurez-vous que l'utilisateur est authentifié
-session_start();
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php'); // Redirige si l'utilisateur n'est pas connecté
+    // L'utilisateur est-il connecté
+    if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
     exit;
-}
+    }
 
-// Vérifier que l'ID du covoiturage est bien passé en paramètre
-if (isset($_GET['id'])) {
-    $covoiturage_id = $_GET['id'];
-    $user_id = $_SESSION['user']['pseudo']; // Récupère l'ID de l'utilisateur connecté
+    // Vérifier que l'ID du covoiturage est bien passé en paramètre
+    if (isset($_GET['id'])) {
+        $covoiturage_id = $_GET['id'];
+        $user_id = $_SESSION['user']['pseudo'];
 
     try {
         // Démarrer une transaction pour garantir que les deux actions se passent ensemble
@@ -34,7 +32,7 @@ if (isset($_GET['id'])) {
         // Valider la transaction
         $pdo->commit();
 
-        // Rediriger l'utilisateur vers la page de son historique
+        // Rediriger l'utilisateur
         header('Location: ../utilisateur.php');
         exit;
 

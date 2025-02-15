@@ -1,25 +1,25 @@
 <?php session_start(); 
 
-require_once '../script/connexionBDD.php';
+    require_once '../script/connexionBDD.php';
 
-$queryEnergie = "SELECT * FROM energies";
-$stmt = $pdo->prepare($queryEnergie);
-$stmt->execute();
+    $queryEnergie = "SELECT * FROM energies";
+    $stmt = $pdo->prepare($queryEnergie);
+    $stmt->execute();
 
-$queryMarque = "SELECT * FROM marques";
-$stmt2 = $pdo->prepare($queryMarque);
-$stmt2->execute();
+    $queryMarque = "SELECT * FROM marques";
+    $stmt2 = $pdo->prepare($queryMarque);
+    $stmt2->execute();
 
-$energies = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$marques = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+    $energies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $marques = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
-$proprietaireId = "SELECT utilisateur_id FROM utilisateurs WHERE pseudo = :pseudo";
-$stmt3 = $pdo->prepare($proprietaireId);
-$stmt3->bindParam(":pseudo", $_SESSION["user"]["pseudo"]);
-$stmt3->execute();
+    $proprietaireId = "SELECT utilisateur_id FROM utilisateurs WHERE pseudo = :pseudo";
+    $stmt3 = $pdo->prepare($proprietaireId);
+    $stmt3->bindParam(":pseudo", $_SESSION["user"]["pseudo"]);
+    $stmt3->execute();
 
-$proprietaire = $stmt3->fetch(PDO::FETCH_ASSOC);
-$proprietaireIdHidden = $proprietaire['utilisateur_id'];
+    $proprietaire = $stmt3->fetch(PDO::FETCH_ASSOC);
+    $proprietaireIdHidden = $proprietaire['utilisateur_id'];
 ?>
 
 <head>
@@ -36,7 +36,6 @@ $proprietaireIdHidden = $proprietaire['utilisateur_id'];
     <link href="http://fonts.googleap.com/css?family=Crete+Round" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>EcoRide</title>
-
 </head>
 
 <header>

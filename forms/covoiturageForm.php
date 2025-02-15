@@ -1,5 +1,40 @@
-<?php 
-session_start(); ?>
+<?php session_start(); ?>
+
+<?php require_once '../script/connexionBDD.php';
+
+    // Vérifiez si l'utilisateur est connecté et s'il a un rôle
+    if (!isset($_SESSION["user"]) || ($_SESSION["user"]["role"] != 3 && $_SESSION["user"]["role"] != 1 && $_SESSION["user"]["role"] != 2)) {
+        // Si l'utilisateur n'est pas connecté ou n'a pas de rôle, affichage d'un message
+        echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez être connecté pour créer à un covoiturage." . "</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../forms/login.php';> Connexion/Inscription </a>" . "<br>" . "<a style='color:#63340B;  font-weight:bold;' href='../index.php';> Retour </a>" . "</div>";
+    exit;
+    }
+
+    // Récupération de l'ID de l'utilisateur connecté
+    $queryUtilisateur = "SELECT utilisateur_id FROM utilisateurs WHERE pseudo = :pseudo";
+    $stmt = $pdo->prepare($queryUtilisateur);
+    $stmt->bindParam(":pseudo", $_SESSION["user"]["pseudo"]);
+    $stmt->execute();
+
+    $createur = $stmt->fetch(PDO::FETCH_ASSOC);
+    $createurIdHidden = $createur['utilisateur_id'];
+
+    // Vérification du nombre de véhicules de l'utilisateur
+    $queryVoitures = "
+        SELECT v.voiture_id, v.modele, m.libelle AS marque
+        FROM voitures v
+        JOIN marques m ON v.marque = m.marque_id
+        WHERE v.proprietaire_id = :proprietaire_id
+        ";
+    $stmt = $pdo->prepare($queryVoitures);
+    $stmt->execute(['proprietaire_id' => $createurIdHidden]);
+    $voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Si aucun véhicule n'est trouvé, afficher un message
+    if (count($voitures) === 0) {
+        echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez enregistrer un véhicule pour pouvoir créer un covoiturage en tant que chauffeur." . "</p><br>" . "<a class='btn'; style='color:#63340B;  font-weight:bold;' href='../forms/vehiculeForm.php';> Ajouter un véhicule </a>" . "<a class='btn'; style='color:#63340B;  font-weight:bold;' href='../utilisateur.php';> Retour </a>" . "</div>";
+    exit();
+    }
+?>
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -17,50 +52,12 @@ session_start(); ?>
     <link href="http://fonts.googleap.com/css?family=Crete+Round" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>EcoRide</title>
-
 </head>
 
 <header>
     <?php require_once '../script/scriptHeader.php'; ?>
     <?php require_once "../front/bigTitle.php"; ?>
 </header>
-
-<?php require_once '../script/connexionBDD.php';
-
-// Vérifiez si l'utilisateur est connecté et s'il a un rôle
-if (!isset($_SESSION["user"]) || ($_SESSION["user"]["role"] != 3 && $_SESSION["user"]["role"] != 1 && $_SESSION["user"]["role"] != 2)) {
-    // Si l'utilisateur n'est pas connecté ou n'a pas de rôle, affichage d'un message
-    echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez être connecté pour créer à un covoiturage." . "</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../forms/login.php';> Connexion/Inscription </a>" . "<br>" . "<a style='color:#63340B;  font-weight:bold;' href='../index.php';> Retour </a>" . "</div>";
-    exit;
-}
-
-// Récupération de l'ID de l'utilisateur connecté
-$queryUtilisateur = "SELECT utilisateur_id FROM utilisateurs WHERE pseudo = :pseudo";
-$stmt = $pdo->prepare($queryUtilisateur);
-$stmt->bindParam(":pseudo", $_SESSION["user"]["pseudo"]);
-$stmt->execute();
-
-$createur = $stmt->fetch(PDO::FETCH_ASSOC);
-$createurIdHidden = $createur['utilisateur_id'];
-
-// Vérification du nombre de véhicules de l'utilisateur
-$queryVoitures = "
-    SELECT v.voiture_id, v.modele, m.libelle AS marque
-    FROM voitures v
-    JOIN marques m ON v.marque = m.marque_id
-    WHERE v.proprietaire_id = :proprietaire_id
-";
-$stmt = $pdo->prepare($queryVoitures);
-$stmt->execute(['proprietaire_id' => $createurIdHidden]);
-$voitures = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Si aucun véhicule n'est trouvé, afficher un message
-if (count($voitures) === 0) {
-    echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez enregistrer un véhicule pour pouvoir créer un covoiturage en tant que chauffeur." . "</p><br>" . "<a class='btn'; style='color:#63340B;  font-weight:bold;' href='../forms/vehiculeForm.php';> Ajouter un véhicule </a>" . "<a class='btn'; style='color:#63340B;  font-weight:bold;' href='../utilisateur.php';> Retour </a>" . "</div>";
-    exit(); // Stopper l'exécution du reste du script
-}
-?>
-
 
 <body>
 
