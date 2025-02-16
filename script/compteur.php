@@ -11,7 +11,7 @@
 
     // Affichage du compteur
         echo '<div class="compteur">';
-        echo '<h2 style="margin: auto 20px; text-decoration: underline;">Nombre de crédits gagnés par la plateforme :</h2>';
+        echo '<h4 style="color: #EBF2FA; margin: auto 20px; text-decoration: underline;">Nombre de crédits gagnés par la plateforme :</h4>' . "<br>";
         echo '<input type="text" style="color: #427AA1; font-size: 30px; text-align: center; margin-bottom: 10px;" value="' . number_format($totalCredits, 0, ',', ' ') . '" readonly>';
         echo '</div>';
 ?>

@@ -20,13 +20,6 @@
     <div class="formLogin mx-auto">
         <p>Vous avez été déconnecter pour inactivité ! Veuillez vous reconecter.</p>
         <a href="../forms/login.php">Se reconnecter</a><br>
+        <a href="../index.php">Retour à l'accueil</a><br>
     </div>
 </body>
-
-<footer>
-
-    <?php require_once "../front/footer.php";?>
-
-</footer>
-
-</html>

@@ -9,7 +9,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    width: 50%;
+    width: 100%;
     margin-top: 30px;
     margin-bottom: 30px;
     border: 2px solid #679436;
@@ -38,7 +38,7 @@
     border: 2px solid #679436;
     border-radius: 5px;
     margin-bottom: 20px;
-    width: auto;
+
 }
 
 .card h2 {
@@ -74,8 +74,7 @@
 }
 
 .container {
-    display: flex;
-    column-gap: 20px;
+    display: block;
 }
 
 body {
@@ -84,4 +83,26 @@ body {
 
 h2 {
     color: #EBF2FA;
+}
+
+@media (max-width: 767px) {
+    .col-12 {
+        width: 80% !important;
+    }
+
+    .row {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .body {
+        width: 80% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .body {
+        width: 50% !important;
+    }
 }

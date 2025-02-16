@@ -28,6 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/style/styleIndex.css" rel="stylesheet">
     <link href="/style/styleAdmin.css" rel="stylesheet">
     <title>EcoRide</title>
@@ -48,46 +49,44 @@
         <button class="button" onclick="window.location.href = '../script/deconnexion.php';"> Déconnexion </button>
     </div>
 
-    <div class="container">
-        <div class="col-sm-6">
-            <div class="card">
-                <h2>Créer un compte employé(e)</h2>
-                <?php require_once 'forms/registerEmploye.php'; ?>
-            </div>
+
+    <div class="col-12 col-md-6 mx-auto mb-3">
+        <div class="card mx-auto">
+            <h2>Créer un compte employé(e)</h2><br>
+            <?php require_once 'forms/registerEmploye.php'; ?>
         </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <h2>Suspendre un compte</h2>
-                <?php require_once 'forms/selectCompteForm.php'; ?>
+
+        <div class="card">
+            <h2>Suspendre un compte</h2>
+            <?php require_once 'forms/selectCompteForm.php'; ?>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+                <div class="card mx-auto">
+                    <h3 class="blanc">Nombre de covoiturages par jour</h3>
+                    <img src="../script/graphique1.php" alt="Graphique des covoiturages" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+                <div class="card mx-auto">
+                    <h3 class="blanc">Gains de la plateforme par jour</h3>
+                    <img src="../script/graphique2.php" alt="Graphique des covoiturages" class="img-fluid">
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="col-sm-6">
-            <div class="card">
-                <h2>Nombre de covoiturages par jour</h2>
-                <img src="../script/graphique1.php" alt="Graphique des covoiturages">
-            </div>
-        </div>
 
-        <div class="col-sm-6">
-            <div class="card">
-                <h2>Gains de la plateforme par jour</h2>
-                <img src="../script/graphique2.php" alt="Graphique des covoiturages">
-            </div>
-        </div>
-    </div>
+
 
     <div class="container">
         <div class="card mx-auto">
             <?php require_once 'script/compteur.php'; ?>
         </div>
-    </div>
-
-    <div class="card mx-auto w-50">
-        <h2>Créditer un utilisateur</h2>
-        <?php require_once 'forms/creditForm.php'; ?>
     </div>
 
 </body>
