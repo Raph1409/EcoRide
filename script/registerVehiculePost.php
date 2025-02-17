@@ -65,7 +65,3 @@
 
 
 ?>
-
-    <footer>
-        <?php require_once '../front/footer.php'; ?>
-    </footer>

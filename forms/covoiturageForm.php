@@ -1,5 +1,9 @@
 <?php session_start(); ?>
 
+<head>
+    <link href="/style/styleCovoiturage.css" rel="stylesheet">
+</head>
+
 <?php require_once '../script/connexionBDD.php';
 
     // Vérifiez si l'utilisateur est connecté et s'il a un rôle
