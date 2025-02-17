@@ -24,7 +24,7 @@
 </header>
 
 <body>
-    <?php require_once '../front/bigtitle.php'; ?>
+    <?php require '../front/bigtitle.php'; ?>
 
     <h2>Connexion</h2>
 
