@@ -9,7 +9,7 @@
     // Vérifiez si l'utilisateur est connecté et s'il a un rôle
     if (!isset($_SESSION["user"]) || ($_SESSION["user"]["role"] != 3 && $_SESSION["user"]["role"] != 1 && $_SESSION["user"]["role"] != 2)) {
         // Si l'utilisateur n'est pas connecté ou n'a pas de rôle, affichage d'un message
-        echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez être connecté pour créer à un covoiturage." . "</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../forms/login.php';> Connexion/Inscription </a>" . "<br>" . "<a style='color:#63340B;  font-weight:bold;' href='../index.php';> Retour </a>" . "</div>";
+        echo require_once "../script/besoinConnexion.php";
     exit;
     }
 
@@ -35,7 +35,7 @@
 
     // Si aucun véhicule n'est trouvé, afficher un message
     if (count($voitures) === 0) {
-        echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez enregistrer un véhicule pour pouvoir créer un covoiturage en tant que chauffeur." . "</p><br>" . "<a class='btn'; style='color:#63340B;  font-weight:bold;' href='../forms/vehiculeForm.php';> Ajouter un véhicule </a>" . "<a class='btn'; style='color:#63340B;  font-weight:bold;' href='../utilisateur.php';> Retour </a>" . "</div>";
+        echo require_once "../script/besoinVehicule.php";
     exit();
     }
 ?>
