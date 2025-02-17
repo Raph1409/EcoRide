@@ -30,7 +30,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/style/styleIndex.css" rel="stylesheet">
     <link href="/style/styleEmploye.css" rel="stylesheet">
-    <link href="/style/styleCovoiturage.css" rel="stylesheet">
     <title>EcoRide</title>
 </head>
 

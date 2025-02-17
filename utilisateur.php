@@ -35,7 +35,6 @@
     </script>
     <link href="/style/styleIndex.css" rel="stylesheet">
     <link href="/style/styleAdmin.css" rel="stylesheet">
-    <link href="/style/styleCovoiturage.css" rel="stylesheet">
     <title>EcoRide</title>
 </head>
 
