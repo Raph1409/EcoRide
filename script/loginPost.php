@@ -24,7 +24,7 @@
 </header>
 
 <body>
-    <?php require '../front/bigtitle.php'; ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/front/bigtitle.php'); ?>
 
     <h2>Connexion</h2>
 
