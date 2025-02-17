@@ -26,9 +26,6 @@
     require_once '../front/bigTitle.php'; 
     require_once '../script/connexionBDD.php';
 
-    $pdo = new PDO($dsn, $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     //Récupérer les données du formulaire de création de compte
     $pseudoForm = $_POST['pseudo'];
     $emailForm = $_POST['email'];
