@@ -41,7 +41,6 @@
                 <div>
                     <p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
                     <p><strong>Téléphone:</strong> <?= htmlspecialchars($user['telephone']) ?></p>
-                    <p><strong>Adresse:</strong> <?= htmlspecialchars($user['adresse']) ?></p>
                     <p><strong>Date de naissance:</strong> <?= htmlspecialchars($user['date_naissance']) ?></p>
                     <p><strong>Crédits:</strong> <?= htmlspecialchars($user['credit']) ?> Crédits</p>
                 </div>

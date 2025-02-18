@@ -25,6 +25,7 @@
 
     .tigre-content {
         display: flex;
+        width: 100%;
         flex-direction: column;
         color: #EBF2FA;
         height: 100%;

@@ -88,3 +88,9 @@ a .bouton {
     font-weight: bold;
     transition: all 0.8s ease;
 }
+
+@media (max-width: 767px) {
+    .formLogin {
+        width: 80% !important;
+    }
+}

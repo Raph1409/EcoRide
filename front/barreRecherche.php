@@ -34,7 +34,7 @@
 
             <div class="col-md-2 d-flex align-items-end">
                 <button type="button" class="btn-custom w-100"
-                    onclick="window.location.href='../forms/covoiturageForm.php'">
+                    onclick="window.location.href='../forms/covoiturageForm.php'" style="font-size: 13px;">
                     Créer un Covoiturage
                 </button>
             </div>

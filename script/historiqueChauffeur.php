@@ -64,7 +64,7 @@
 <div class="container">
     <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($en_cours as $covoiturage): ?>
-        <div class="col-md-4 md-4">
+        <div class="col-12 col-md-6 col-lg-4 md-4">
             <div class="card shadow">
                 <div class="card-body d-flex">
 
@@ -109,7 +109,7 @@
 <div class="container">
     <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($en_attente as $covoiturage): ?>
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card shadow">
                 <div class="card-body d-flex">
 
@@ -144,7 +144,7 @@
 
     <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($a_valider as $covoiturage): ?>
-        <div class="col-md-4 md-4">
+        <div class="col-12 col-md-6 col-lg-4 md-4">
             <div class="card shadow">
                 <div class="card-body d-flex">
 
@@ -179,7 +179,7 @@
 
     <div class="row mx-auto" style="width: 100%;">
         <?php foreach ($termine as $covoiturage): ?>
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card shadow">
                 <div class="card-body d-flex">
 

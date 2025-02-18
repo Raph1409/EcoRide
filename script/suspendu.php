@@ -23,11 +23,3 @@
         <a href="../script/deconnexion.php">Retour</a>
     </div>
 </body>
-
-<footer>
-
-    <?php require_once "../front/footer.php";?>
-
-</footer>
-
-</html>

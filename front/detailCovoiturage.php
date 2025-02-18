@@ -53,7 +53,7 @@
     // Vérifiez si l'utilisateur est connecté et s'il a le bon rôle (id == 3)
     if (!isset($_SESSION['user']) || !isset($_SESSION['user']['role']) || $_SESSION['user']['role'] != 3) {
         // Si l'utilisateur n'est pas connecté ou n'a pas le rôle utilisateur, redirigez-le ou affichez un message
-        echo '<div class="bienvenue mx-auto">' . " <p style='color:#EBF2FA; padding-top:20px; font-weight:bold;'>" .  "Vous devez être connecté en tant qu'utilisateur pour vous inscrire à un covoiturage." . "</p>" . "<a style='color:#63340B; padding-top:20px; font-weight:bold;' href='../index.php';> Retour </a>" . "</div>";;
+        echo require_once "../script/besoinConnexion.php";
     exit;
     }
 
