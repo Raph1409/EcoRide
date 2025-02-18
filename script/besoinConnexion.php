@@ -16,7 +16,7 @@
 <body>
     <h2>Connexion manquante !</h2>
     <div class="formLogin mx-auto">
-        <p>Vous devez être connecté pour créer à un covoiturage.</p>
+        <p>Vous devez être connecté pour créer un covoiturage.</p>
         <a href="../forms/login.php">Se connecter</a><br>
         <a href="../forms/register.php">Créer un compte</a><br>
         <a href="../index.php">Retour</a>
