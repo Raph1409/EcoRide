@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/style/styleCovoiturage.css" rel="stylesheet">
 </head>
 
@@ -65,7 +66,7 @@
 
 <body>
 
-    <h2>Formulaire d'inscription</h2>
+    <h2>création d'un covoiturage</h2>
 
     <form class="formLogin mx-auto" action="../script/registerCovoituragePost.php" method="POST">
         <input type="hidden" name="createur" value="<?php echo $createurIdHidden; ?>">

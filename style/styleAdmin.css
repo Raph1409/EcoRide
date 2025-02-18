@@ -93,6 +93,32 @@ h2 {
     .row {
         justify-content: center;
     }
+
+    .card-body {
+        display: block;
+        text-align: left;
+    }
+
+    .card-body .text-center {
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .card-body p {
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .card-body .pseudoCard {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .card-body img {
+        margin-bottom: 10px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -103,6 +129,12 @@ h2 {
 
 @media (min-width: 768px) {
     .body {
+        width: 50% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .col-md-6 {
         width: 50% !important;
     }
 }

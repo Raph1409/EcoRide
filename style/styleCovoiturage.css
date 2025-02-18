@@ -66,48 +66,34 @@ form .btn:hover {
     font-weight: bold;
 }
 
-/* Sur mobile */
 @media (max-width: 767px) {
     .card {
         max-width: 90%;
-        /* Limiter la largeur de la carte */
         margin: auto;
-        /* Centrer la carte */
     }
 
     .card-body {
         display: flex;
         flex-direction: column;
-        /* Afficher les éléments du card-body verticalement sur mobile */
         align-items: center;
-        /* Centrer les éléments dans la carte */
         padding: 10px;
-        /* Réduire l'espace entre les éléments */
     }
 
-    /* Pour les images, les réduire et les aligner correctement */
     .card img {
         width: 60px;
-        /* Réduire la taille de l'image */
         height: 60px;
         margin-bottom: 10px;
-        /* Ajouter un peu d'espace sous l'image */
     }
 
-    /* Gérer l'affichage des étoiles */
     .text-warning {
         font-size: 1rem;
-        /* Taille plus petite pour les étoiles */
         margin-bottom: 10px;
-        /* Espacement avec les autres éléments */
     }
 
-    /* Réduire le texte de la carte */
     .card h6,
     .card p {
         font-size: 0.9rem;
         text-align: center;
-        /* Centrer le texte pour que ce soit plus lisible */
     }
 
     .card-footer {
@@ -115,8 +101,8 @@ form .btn:hover {
     }
 }
 
-/* Sur les écrans moyens et plus grands */
-@media (min-width: 768px) {
+
+@media (min-width: 1024px) {
     .card {
         max-width: 100%;
     }
@@ -124,20 +110,35 @@ form .btn:hover {
     .card-body {
         display: flex;
         justify-content: space-between;
-        /* Disposer l'image et le contenu de manière horizontale */
         align-items: flex-start;
         padding: 20px;
     }
 
-    /* Pour les images, garder une taille plus grande sur les écrans moyens et plus grands */
     .card img {
         width: 80px;
         height: 80px;
     }
 
-    /* Réduire légèrement la taille du texte pour les écrans plus grands */
     .card h6,
     .card p {
         font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .card {
+        width: 100%;
+        max-width: none;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .col-md-6 {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
     }
 }

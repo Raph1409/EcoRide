@@ -95,9 +95,9 @@
             </div>
         </div>
         <?php endforeach; ?>
-        <?php else: ?>
-        <p>Aucun covoiturage trouvé.</p>
-        <?php endif; ?>
+        <?php else: 
+        require_once "../script/resultatEchec.php";
+        endif; ?>
     </div>
 </body>
 
