@@ -37,7 +37,7 @@
     imageline($image, $marge_gauche, 10, $marge_gauche, $hauteur - $marge_bas, $noir);
 
     // Dessin du graphique
-    $max_valeur = max($valeurs);
+    $max_valeur = !empty($valeurs) ? max($valeurs) : 0;
     foreach ($jours as $i => $jour) {
         $x = $marge_gauche + ($i * $espacement_barres);
         $hauteur_barre = ($valeurs[$i] / $max_valeur) * ($hauteur - $marge_bas - 20);
