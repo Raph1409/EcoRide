@@ -1,3 +1,8 @@
+<?php 
+session_start();
+require_once '../script/connexionBDD.php';
+?>
+
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -6,7 +11,7 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <meta charset="utf_8">
-    <meta name="viewport" content="width=device-width, initial-script">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/style/styleHeader.css" rel="stylesheet">
     <link href="/style/styleBigTitle.css" rel="stylesheet">
@@ -18,7 +23,6 @@
 
 <header>
     <?php 
-    require_once '../script/connexionBDD.php';
     require_once '../front/header.php'; 
     ?>
 </header>
@@ -43,8 +47,6 @@
         if($stmt->rowCount() == 1){
             $monUtilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
         if(password_verify($passwordForm, $monUtilisateur["password"])){
-            //On démarre la session
-            session_start();
             //On stocke dans $_SESSION les informations de l'utilisateur
             $_SESSION["user"] = [
                 "pseudo" => $monUtilisateur["pseudo"],
