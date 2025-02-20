@@ -22,9 +22,7 @@ require_once '../script/connexionBDD.php';
 </head>
 
 <header>
-    <?php 
-    require_once '../front/header.php'; 
-    ?>
+    <?php require_once '../front/header.php'; ?>
 </header>
 
 <body>
@@ -33,21 +31,21 @@ require_once '../script/connexionBDD.php';
     <h2>Connexion</h2>
 
     <?php
+    // Récupérer les données du formulaire de connexion
+    $emailForm = $_POST['email'];
+    $passwordForm = $_POST['password'];
 
-        //Récupérer les données du formulaire de connexion
-        $emailForm = $_POST['email'];
-        $passwordForm = $_POST['password'];
+    $query = "SELECT * FROM utilisateurs WHERE email = :email";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":email", $emailForm);
+    $stmt->execute();
 
-        $query = "SELECT * FROM utilisateurs WHERE email = :email";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(":email", $emailForm);
-        $stmt->execute();
-
-        //Est-ce que l'adresse mail existe
-        if($stmt->rowCount() == 1){
-            $monUtilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(password_verify($passwordForm, $monUtilisateur["password"])){
-            //On stocke dans $_SESSION les informations de l'utilisateur
+    // Vérification de l'existence de l'utilisateur
+    if ($stmt->rowCount() == 1) {
+        $monUtilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (password_verify($passwordForm, $monUtilisateur["password"])) {
+            // Stockage des informations de l'utilisateur en session
             $_SESSION["user"] = [
                 "pseudo" => $monUtilisateur["pseudo"],
                 "email" => $monUtilisateur["email"],
@@ -56,40 +54,26 @@ require_once '../script/connexionBDD.php';
                 "prenom" => $monUtilisateur["prenom"],
             ];
 
-        if($_SESSION["user"]["role"] === 1){
-            
-            header("Location: ../admin.php");
-
-        }else if($_SESSION["user"]["role"] === 2){
-
-            header("Location: ../index.php");
-
-        }else if($_SESSION["user"]["role"] === 4){
-
-            header("Location: ../script/suspendu.php");    
-
-        }else if($_SESSION["user"]["role"] === 3){
-
-            header("Location: ../index.php");
-
-
-            echo '<div class="bienvenue mx-auto">' . " <p style='color:#63340B; padding-top:20px; font-weight:bold;'>" . "Connexion réussie, Bienvenue " .$monUtilisateur['prenom'] ."</p>" ."</div>";
-        
+            // Redirection en fonction du rôle
+            if ($_SESSION["user"]["role"] === 1) {
+                header("Location: ../admin.php");
+                exit();
+            } else if ($_SESSION["user"]["role"] === 2) {
+                header("Location: ../index.php");
+                exit();
+            } else if ($_SESSION["user"]["role"] === 4) {
+                header("Location: ../script/suspendu.php");    
+                exit();
+            } else if ($_SESSION["user"]["role"] === 3) {
+                header("Location: ../index.php");
+                exit();
+            }
         } else {
-            echo '<div class="bienvenue mx-auto">' . " <p style='color:#63340B; padding-top:20px; font-weight:bold;'>" . "Mot de passe et/ou email incorrect" ."</p>" ."</div>";
+            require_once "../script/wrongLogin.php";
         }
-
-        } else {
-            echo '<div class="bienvenue mx-auto">' . " <p style='color:#63340B; padding-top:20px; font-weight:bold;'>" . "Mot de passe et/ou email incorrect" ."</p>" ."</div>";
-        }
-
-        } 
-
-
+    } else {
+        // Message si l'email n'existe pas
+        require_once "../script/wrongLogin.php";
+    }
     ?>
-
 </body>
-
-<footer>
-    <?php require_once '../front/footer.php'; ?>
-</footer>
