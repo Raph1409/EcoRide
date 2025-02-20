@@ -1,0 +1,6 @@
+{
+    "name": "formation-ecoride",
+    "require": {
+        "ext-gd": "*"
+    }
+}
